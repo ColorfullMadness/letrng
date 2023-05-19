@@ -1,0 +1,9 @@
+Podpis cyfrowy:
+niezbywalnośc
+funkcja skrótu: 
+    - 1 bit na wejściu przynajmniej połowa bitów na wyjsciu
+
+    - wykazanie że jeśli waidomość się zmieni lub błędny klucz wtedy nie uda się doszyfrować
+    - zaimplementowanie własnego klucza RSA, można z biblioteki tak samo jak funkcje skrótu 
+    pycrypto - podmienienie funkcji generatora
+    
