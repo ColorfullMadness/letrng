@@ -7,5 +7,12 @@ edition = "2021"
 
 [dependencies]
 bytemuck = "1.13.1"
+crypto = "0.5.0"
+gcd = "2.3.0"
+mod_exp = "1.0.1"
+modinverse = "0.1.1"
+num = "0.4.0"
 rand = "0.8.5"
 rsa = "0.9.2"
+sha = "1.0.3"
+sha3 = "0.10.8"
