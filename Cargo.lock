@@ -161,6 +161,7 @@ dependencies = [
  "rand",
  "rsa",
  "sha",
+ "sha2",
  "sha3",
 ]
 
@@ -417,6 +418,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4208d5a903276a9f3b797afdf6c5bc12a8da1344b053b100abf3565ecc80cb7e"
 dependencies = [
  "bswap",
+]
+
+[[package]]
+name = "sha2"
+version = "0.10.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "82e6b795fe2e3b1e845bafcb27aa35405c4d47cdfc92af5fc8d3002f76cebdc0"
+dependencies = [
+ "cfg-if",
+ "cpufeatures",
+ "digest",
 ]
 
 [[package]]

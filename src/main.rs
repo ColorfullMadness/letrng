@@ -8,6 +8,7 @@ use std::{thread, vec};
 use std::fs::File;
 use rand::prelude::*;
 use rsa::{Pkcs1v15Encrypt, RsaPrivateKey, RsaPublicKey};
+use sha2::{Sha256, Digest};
 
 const N: u32 = 100000000;
 
@@ -255,21 +256,29 @@ fn main() {
     println!("Elapsed public key generation: {:.2?}",now.elapsed());
 
     let data = b"Marmolada jest pyszna";
-    let enc_data = pub_key.encrypt(&mut letrng, Pkcs1v15Encrypt, &data[..]).expect("Problem with encrypting data.");
+    let mut hasher = Sha256::new();
+    hasher.update(data);
+    let data_sha = hasher.finalize(); 
+    let enc_data = pub_key.encrypt(&mut letrng, Pkcs1v15Encrypt, &data_sha[..]).expect("Problem with encrypting data.");
     println!("Elapsed encrypting:            {:.2?}",now.elapsed());
 
+
     let data_2 = b"Marmolada nie jest pyszna";
-    let enc_data_2 = pub_key.encrypt(&mut letrng, Pkcs1v15Encrypt, &data_2[..]).expect("Problem with encrypting data.");
-    assert_ne!(enc_data, enc_data_2);
+    let mut hasher = Sha256::new();
+    hasher.update(data_2);
+    let data_sha2 = hasher.finalize(); 
 
     let dec_data = priv_key.decrypt(Pkcs1v15Encrypt, &enc_data).expect("Problems with decoding data.");
     println!("Elapsed decrypting:            {:.2?}",now.elapsed());
-    
+
+
+
     println!("Priv key:   {:?}",priv_key);
     println!("Public key: {:?}",pub_key);
 
     println!("Enc data: {:?}",enc_data);
-    println!("Dec data: {}",String::from_utf8(dec_data).expect("Problem with casting"));
+    println!("Dec data: {:?}",dec_data);
+    println!("Given sha:{:?}",data_sha2);
 
 
     let priv_key = RsaPrivateKey::new(&mut letrng, 2048).expect("Failed to generate key.");
